@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {fetchMovieTrailer} from '../../api/index';
+import {fetchMovieTrailer} from '../../../api/index';
 import YouTube from 'react-youtube';
 import './index.css';
 

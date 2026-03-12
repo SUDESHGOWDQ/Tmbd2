@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import {Button} from '../Button/index'
+import { MovieContext } from "../../context/MovieContext";
 import './index.css'
 
-const index = ({currentPage,handleNext,handlePrev,totalPages}) => {
+const Index = () => {
+	const {currentPage, totalPages, handlePrev, handleNext} = useContext(MovieContext)
   return (
 	<div className='pagination'>
 	<Button onClick={handlePrev} text="Prev"/>
@@ -12,4 +14,4 @@ const index = ({currentPage,handleNext,handlePrev,totalPages}) => {
   )
 }
 
-export default index
+export default Index

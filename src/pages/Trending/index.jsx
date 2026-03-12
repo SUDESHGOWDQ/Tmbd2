@@ -1,39 +1,35 @@
-import React,{useState,useEffect} from 'react'
-import {fetchTrendingMovies} from '../../api/index'
-import { Link } from 'react-router-dom'
-import {Card,CardTitle,CardImage,CardRating,CardDate} from '../../Components/Card/index'
-import './index.css'
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { MovieContext } from '../../context/MovieContext';
+import { Card, CardTitle, CardImage, CardRating, CardDate } from '../../Components/Card/index';
+import Loader from '../../Components/Loader/index';
+import './index.css';
 
-const index = () => {
+const Index = () => {
+  const { trendingMovies,loading } = useContext(MovieContext);
 
-	const[movie,setMovie] = useState([])
+  const image_Url = "https://image.tmdb.org/t/p/original";
 
-	useEffect(()=>{
-		fetchTrendingMovies()
-		.then((d)=>{
-			setMovie(d.results)
-		})
-	},[])
-
-	const image_Url = "https://image.tmdb.org/t/p/original"
-	
+  if (loading) {
+	return <Loader/>;
+  }
 
   return (
-	<div className='Home'>
-	{
-		movie.map((item,index)=>{
-			return(
-				<Card key={item.id}>
-				<Link to={`/movie/${item.id}`}><CardImage  src={`${image_Url}/${item.poster_path}`}/></Link>
-				<CardTitle title={item.title}/>
-				<CardDate date={item.release_date}/>
-				<CardRating rating={item.vote_average}/>
-				</Card>
-			)
-		})
-	}
-	</div>
-  )
-}
+    <div className='Home'>
+      {
+        trendingMovies.map((item) => {
+          return (
+            <Card key={item.id}>
+              <Link to={`/movie/${item.id}`}><CardImage src={`${image_Url}/${item.poster_path}`} /></Link>
+              <CardTitle title={item.title} />
+              <CardDate date={item.release_date} />
+              <CardRating rating={item.vote_average} />
+            </Card>
+          );
+        })
+      }
+    </div>
+  );
+};
 
-export default index
+export default Index;

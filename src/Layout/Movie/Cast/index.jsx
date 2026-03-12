@@ -1,11 +1,11 @@
 import React,{useState,useEffect} from 'react'
-import {fetchMovieCast} from '../../api/index'
+import {fetchMovieCast} from '../../../api/index'
 import './index.css'
 
-const Index = ({id}) => {
+const Index = ({id,imageBaseUrl}) => {
 
 	const[cast,setCast] = useState([])
-	const imageBaseUrl = 'https://image.tmdb.org/t/p/w500'
+	
 
 	useEffect(()=>{
 		fetchMovieCast(id)

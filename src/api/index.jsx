@@ -77,11 +77,12 @@ async function fetchMovieCast (movieId) {
 
 
 
-async function fetchUpcomingMovies() {
+async function fetchUpcomingMovies(page=1) {
 	const response = await axios.get(`${baseUrl}movie/upcoming`, {
 		params: {
 			api_key: api_key,
 			language: "en-US",
+			page: page,
 		},
 	});
 	return response.data;
