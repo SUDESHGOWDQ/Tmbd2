@@ -1,0 +1,36 @@
+.about-page{
+    background:#0f172a;
+    min-height:100vh;
+    padding:40px;
+    color:white;
+    text-align:center;
+}
+
+.about-title{
+    color:#facc15;
+    font-size:36px;
+    margin-bottom:30px;
+}
+
+.about-container{
+    max-width:800px;
+    margin:auto;
+    background:#1e293b;
+    padding:30px;
+    border-radius:10px;
+    line-height:1.7;
+}
+
+.about-container h2{
+    margin-top:20px;
+    color:#facc15;
+}
+
+.about-container ul{
+    list-style:none;
+    padding:0;
+}
+
+.about-container li{
+    padding:8px 0;
+}

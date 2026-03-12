@@ -1,0 +1,18 @@
+.btn-custom{
+	height: 25px;
+	width: auto;
+	background-color: #e50914;
+	color: white;
+	font-weight: 900;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-custom:hover{
+	background-color: #f40612;
+	cursor: pointer;
+}
