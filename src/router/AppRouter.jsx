@@ -1,8 +1,10 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "../Layout/Navbar";
 import Footer from "../Layout/Footer";
 import Loader from "../Components/Loader";
+import withAuth from "../context/AuthHOC";
+import Login from "../pages/Login";
 
 const Dashboard = React.lazy(() => import("../pages/Dashboard"));
 const Trending = React.lazy(() => import("../pages/Trending"));
@@ -19,14 +21,22 @@ const SuspenseWrapper = ({ children }) => {
 
 const AppRouter = () => {
   return (
-    <BrowserRouter>
+    <>
       <Navbar />
       <Routes>
+        <Route
+          path="/login"
+          element={
+            <SuspenseWrapper>
+              <Login />
+            </SuspenseWrapper>
+          }
+        />
         <Route
           path="/"
           element={
             <SuspenseWrapper>
-              <Dashboard />
+              {withAuth(Dashboard)()}
             </SuspenseWrapper>
           }
         />
@@ -34,7 +44,7 @@ const AppRouter = () => {
           path="/trending"
           element={
             <SuspenseWrapper>
-              <Trending />
+              {withAuth(Trending)()}
             </SuspenseWrapper>
           }
         />
@@ -42,7 +52,7 @@ const AppRouter = () => {
           path="/upcoming"
           element={
             <SuspenseWrapper>
-              <Upcoming />
+              {withAuth(Upcoming)()}
             </SuspenseWrapper>
           }
         />
@@ -50,7 +60,7 @@ const AppRouter = () => {
           path="/movie/:id"
           element={
             <SuspenseWrapper>
-              <Movie />
+              {withAuth(Movie)()}
             </SuspenseWrapper>
           }
         />
@@ -58,7 +68,7 @@ const AppRouter = () => {
           path="/person/:id"
           element={
             <SuspenseWrapper>
-              <Person />
+              {withAuth(Person)()}
             </SuspenseWrapper>
           }
         />
@@ -66,7 +76,7 @@ const AppRouter = () => {
           path="/contact"
           element={
             <SuspenseWrapper>
-              <Contact />
+              {withAuth(Contact)()}
             </SuspenseWrapper>
           }
         />
@@ -74,7 +84,7 @@ const AppRouter = () => {
           path="/about"
           element={
             <SuspenseWrapper>
-              <About />
+              {withAuth(About)()}
             </SuspenseWrapper>
           }
         />
@@ -88,7 +98,7 @@ const AppRouter = () => {
         />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 };
 
