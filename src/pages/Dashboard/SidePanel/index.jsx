@@ -22,17 +22,6 @@ const SidePanel = () => {
           <li><a href="#now-playing">Now Playing</a></li>
         </ul>
       </div>
-
-      <div className="genres">
-        <h4>Genres</h4>
-        <ul>
-          <li>Action</li>
-          <li>Comedy</li>
-          <li>Drama</li>
-          <li>Horror</li>
-          <li>Sci-Fi</li>
-        </ul>
-      </div>
     </div>
   );
 };

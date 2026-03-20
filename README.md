@@ -1,16 +1,82 @@
-# React + Vite
+# TMDB Movie App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a movie browsing application built with React and Vite. It allows users to explore trending, upcoming, and popular movies, view detailed information, and watch trailers.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project is organized as follows:
 
-## React Compiler
+```
+src/
+├── api/                # API service functions
+├── assets/             # Static assets (images, etc.)
+├── Components/         # Reusable UI components
+│   ├── Button/         # Button component
+│   ├── Card/           # Card component
+│   ├── Input/          # Input component
+│   ├── Loader/         # Loader component
+│   ├── Modal/          # Modal component
+│   ├── Pagination/     # Pagination component
+├── context/            # React Context for state management
+├── hooks/              # Custom React hooks
+├── Layout/             # Layout components
+│   ├── Navbar/         # Navigation bar
+│   ├── Footer/         # Footer
+│   ├── Movie/          # Movie details layout
+│   │   ├── Cast/       # Cast details
+│   │   ├── Person/     # Person details
+│   │   ├── Trailer/    # Movie trailer
+│   ├── 404Error/       # 404 Error page
+├── pages/              # Page components
+│   ├── About/          # About page
+│   ├── Contact/        # Contact page
+│   ├── Dashboard/      # Dashboard page
+│   │   ├── Home/       # Home section
+│   │   ├── SidePanel/  # Side panel
+│   ├── Trending/       # Trending movies page
+│   ├── Upcoming/       # Upcoming movies page
+├── router/             # Application routing
+├── App.jsx             # Root component
+├── main.jsx            # Application entry point
+├── index.css           # Global styles
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
+- Browse trending, upcoming, and popular movies
+- View detailed movie information
+- Watch trailers
+- Responsive design
 
-## Expanding the ESLint configuration
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd tmbd-movie
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Scripts
+- `npm run dev`: Start the development server
+- `npm run build`: Build the project for production
+- `npm run preview`: Preview the production build
+- `npm run lint`: Run ESLint
+
+## Technologies Used
+- React
+- Vite
+- React Router
+- Axios
+- TMDB API
+
+## License
+This project is licensed under the MIT License.

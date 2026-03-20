@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import emailjs from '@emailjs/browser';
 import "./index.css";
 
 function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+ 
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+ const form = useRef();
 
-  const handleSubmit = (e) => {
+  const sendEmail = (e) => {
     e.preventDefault();
-    alert("Thank you for reaching out! We'll get back to you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
+    emailjs
+      .sendForm('service_ybggv25', 'template_p4tkzkb', form.current, {
+        publicKey: 'FmOIszszd4CiYs9ob',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
   };
+ 
 
   return (
     <div className="contact-page">
@@ -42,49 +41,19 @@ function ContactPage() {
           </ul>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <h2>Send Us a Message</h2>
-
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Enter your name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Write your message here"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-
-          <button type="submit" className="submit-button">Submit</button>
-        </form>
+	  <form className="contact-form " ref={form} onSubmit={sendEmail}>
+	  <h2>Send Us a Message</h2>
+     <div className="form-group">
+	  <label>Name</label>
+      <input type="text" name="user_name" />
+      <label>Email</label>
+      <input type="email" name="user_email" />
+      <label>Message</label>
+      <textarea name="message" />
+      <input className="submit-button" type="submit" value="Send" />
+	 </div>
+    </form>
+       
       </div>
     </div>
   );

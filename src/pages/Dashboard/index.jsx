@@ -3,6 +3,7 @@ import Home from './Home'
 import SidePanel from './SidePanel'
 import Loader from '../../components/Loader'
 import {MovieContext} from '../../context/movieContext'
+import Pagination from '../../components/Pagination'
 import './index.css'
 
 const Index = () => {
@@ -16,7 +17,10 @@ const Index = () => {
      {loading ? (
 		<Loader/>
 	  ) : (
+		<>
 		<Home movie={movie} />
+		<Pagination />
+		</>
 	  )}
      </div>
     </div>

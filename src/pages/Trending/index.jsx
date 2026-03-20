@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MovieContext } from '../../context/MovieContext';
 import { Card, CardTitle, CardImage, CardRating, CardDate } from '../../Components/Card/index';
 import Loader from '../../Components/Loader/index';
+import Pagination from '../../components/Pagination';
 import './index.css';
 
 const Index = () => {
@@ -28,6 +29,7 @@ const Index = () => {
           );
         })
       }
+	  <Pagination/>
     </div>
   );
 };

@@ -75,6 +75,26 @@ async function fetchMovieCast (movieId) {
   return response.data;
 }
 
+async function fetchCastDetails (castId) {
+  const response = await axios.get(`${baseUrl}person/${castId}`, {
+	params: {
+	  api_key: api_key,
+	  language: "en-US",
+	},
+  });
+  return response.data;
+}
+
+async function fetchMovieCredits(personId) {
+  const response = await axios.get(`${baseUrl}person/${personId}/movie_credits`, {
+    params: {
+      api_key: api_key,
+      language: "en-US",
+    },
+  });
+  return response.data;
+}
+
 
 
 async function fetchUpcomingMovies(page=1) {
@@ -97,6 +117,8 @@ export {
 	fetchTrendingMovies,
 	fetchUpcomingMovies,
 	fetchMovieTrailer,
-	fetchMovieCast
+	fetchMovieCast,
+	fetchCastDetails,
+	fetchMovieCredits
 }
 
