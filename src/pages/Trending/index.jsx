@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { MovieContext } from '../../context/MovieContext';
-import { Card, CardTitle, CardImage, CardRating, CardDate } from '../../Components/Card/index';
+import { Card, CardTitle, CardImage, CardRating, CardDate,CardDescription } from '../../Components/Card/index';
 import Loader from '../../Components/Loader/index';
 import Pagination from '../../components/Pagination';
 import './index.css';
@@ -23,6 +23,7 @@ const Index = () => {
             <Card key={item.id}>
               <Link to={`/movie/${item.id}`}><CardImage src={`${image_Url}/${item.poster_path}`} /></Link>
               <CardTitle title={item.title} />
+			  <CardDescription description={item.overview} maxLength={150}/>
               <CardDate date={item.release_date} />
               <CardRating rating={item.vote_average} />
             </Card>

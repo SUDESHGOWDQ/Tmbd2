@@ -1,4 +1,5 @@
 import './index.css'
+import { trimString } from '../../utils/stringUtils'
 
 export function Card({children}){
 	return(
@@ -32,5 +33,11 @@ export function CardDate({date}){
 export function CardRating({rating}){
 	return(
 		<p className="card-rating">{rating}</p>
+	)
+}
+
+export function CardDescription({description, maxLength = 100}){
+	return(
+		<p className="card-description">{trimString(description, maxLength)}</p>
 	)
 }

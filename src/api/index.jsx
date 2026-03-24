@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const api_key = "ab1da08307f82007e9975d4dccf67670"
-const baseUrl = "https://api.themoviedb.org/3/"
+// Updated to use Vite-compatible environment variable prefixes
+const api_key = import.meta.env.VITE_API_KEY;
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 async function fetchPopularMovies(page = 1){
 	const response = await axios.get(`${baseUrl}movie/popular`,{

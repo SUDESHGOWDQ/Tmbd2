@@ -1,47 +1,65 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { MovieContext } from "../../context/MovieContext";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import validationSchema from '../../utils/ValidationSchema';
 import "./index.css";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const { login } = useContext(MovieContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const success = login(username, password);
-    if (success) {
-      navigate("/");
-    } else {
-      alert("Invalid credentials");
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      const success = login(values.username, values.password);
+      if (success) {
+        navigate("/");
+      } else {
+        alert("Invalid credentials");
+      }
+    },
+  });
 
   return (
     <div className="login-container">
       <div className="login-form">
         <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div>
             <label>Username:</label>
             <input
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              name="username"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.username && formik.errors.username ? (
+              <div className="error">{formik.errors.username}</div>
+            ) : null}
           </div>
           <div>
             <label>Password:</label>
             <input
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
+            {formik.touched.password && formik.errors.password ? (
+              <div className="error">{formik.errors.password}</div>
+            ) : null}
           </div>
           <button type="submit">Login</button>
         </form>
+		<div>use name as user</div>
+		<div>use password as user123</div>
       </div>
     </div>
   );

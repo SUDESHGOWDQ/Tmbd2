@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {Card,CardTitle,CardImage,CardRating,CardDate} from '../../../Components/Card'
+import {Card,CardTitle,CardImage,CardRating,CardDate,CardDescription} from '../../../Components/Card'
 import './index.css'
 
 const index = ({movie}) => {
@@ -16,6 +16,7 @@ const index = ({movie}) => {
 				<Card key={item.id}>
 				<Link to={`/movie/${item.id}`}><CardImage  src={`${image_Url}/${item.poster_path}`}/></Link>
 				<CardTitle title={item.title}/>
+				<CardDescription description={item.overview}/>
 				<CardDate date={item.release_date}/>
 				<CardRating rating={item.vote_average}/>
 				</Card>
