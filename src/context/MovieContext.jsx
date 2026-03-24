@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { fetchPopularMovies, searchMovies,fetchTrendingMovies,fetchUpcomingMovies } from "../api";
+import {
+  fetchPopularMovies,
+  searchMovies,
+  fetchTrendingMovies,
+  fetchUpcomingMovies,
+  fetchMovieGenres,
+  fetchMoviesByGenre,
+} from "../api";
 import users from "../api/users.json";
 
 const MovieContext = React.createContext();
@@ -9,6 +16,8 @@ export const MovieProvider = ({ children }) => {
   const [movie, setMovie] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState("");
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -19,7 +28,11 @@ export const MovieProvider = ({ children }) => {
   const fetchMovies = useCallback(async () => {
     setLoading(true);
     try {
-      if (search) {
+      if (selectedGenre) {
+        const d = await fetchMoviesByGenre(selectedGenre, currentPage);
+        setMovie(d.results);
+        setTotalPages(d.total_pages);
+      } else if (search) {
         const d = await searchMovies(search, currentPage);
         setMovie(d.results);
         setTotalPages(d.total_pages);
@@ -43,11 +56,28 @@ export const MovieProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, [search, currentPage]);
+  }, [search, selectedGenre, currentPage]);
+
+  const fetchGenres = useCallback(async () => {
+    try {
+      const d = await fetchMovieGenres();
+      setGenres(d.genres || []);
+    } catch (error) {
+      console.error("Error fetching genres:", error);
+    }
+  }, []);
 
   useEffect(() => {
     fetchMovies();
   }, [fetchMovies]);
+
+  useEffect(() => {
+    fetchGenres();
+  }, [fetchGenres]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedGenre]);
 
   function handleNext() {
     if (currentPage < totalPages) {
@@ -84,6 +114,9 @@ export const MovieProvider = ({ children }) => {
         movie,
 		trendingMovies,
 		upcomingMovies,
+    genres,
+    selectedGenre,
+    setSelectedGenre,
         search,
         setSearch,
         currentPage,

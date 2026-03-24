@@ -28,6 +28,20 @@
 	text-align: center;
 }
 
+.genre-select {
+	background-color: #1f1f1f;
+	color: #ffffff;
+	border: 1px solid #555;
+	padding: 8px 10px;
+	border-radius: 6px;
+	outline: none;
+	min-width: 160px;
+}
+
+.genre-select:focus {
+	border-color: #7f5af0;
+}
+
 @media (min-width: 768px) {
 	.Navbar {
 		height: 100px;

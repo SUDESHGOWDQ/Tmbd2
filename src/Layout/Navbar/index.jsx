@@ -7,7 +7,7 @@ import './index.css'
 
 const Index = () => {
 
-  const { search, setSearch } = React.useContext(MovieContext)
+  const { search, setSearch, genres, selectedGenre, setSelectedGenre } = React.useContext(MovieContext)
   
   const [value, setValue] = useState(search)
 
@@ -29,6 +29,21 @@ const Index = () => {
               onchange={(e) => setValue(e.target.value)}
               placeholder="Search Movies"
             />
+          </li>
+
+          <li>
+            <select
+              className="genre-select"
+              value={selectedGenre}
+              onChange={(e) => setSelectedGenre(e.target.value)}
+            >
+              <option value="">All Genres</option>
+              {genres.map((genre) => (
+                <option key={genre.id} value={genre.id}>
+                  {genre.name}
+                </option>
+              ))}
+            </select>
           </li>
 
           <Link style={{ color: 'white', textDecoration: 'none' }} to={'/'}>

@@ -109,6 +109,30 @@ async function fetchUpcomingMovies(page=1) {
 	return response.data;
 }
 
+async function fetchMovieGenres() {
+	const response = await axios.get(`${baseUrl}genre/movie/list`, {
+		params: {
+			api_key: api_key,
+			language: "en-US",
+		},
+	});
+	return response.data;
+}
+
+async function fetchMoviesByGenre(genreId, page = 1) {
+	const response = await axios.get(`${baseUrl}discover/movie`, {
+		params: {
+			api_key: api_key,
+			language: "en-US",
+			with_genres: genreId,
+			page: page,
+		},
+	});
+	const data = response.data;
+	data.results = data.results.slice(0, 6);
+	return data;
+}
+
 
 
 export {
@@ -117,6 +141,8 @@ export {
 	fetchMovieDetails,
 	fetchTrendingMovies,
 	fetchUpcomingMovies,
+	fetchMovieGenres,
+	fetchMoviesByGenre,
 	fetchMovieTrailer,
 	fetchMovieCast,
 	fetchCastDetails,
